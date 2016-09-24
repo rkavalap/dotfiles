@@ -1,0 +1,9 @@
+[user]
+	name = Rahul Kavalapara
+	email = rkavalap@gmail.com
+[credential]
+	helper = cache
+[core]
+  autocrlf = input
+  excludesfile = ~/.gitignore
+  
