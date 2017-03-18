@@ -1,0 +1,13 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "typescript.check.tscVersion": false,
+    "typescript.check.workspaceVersion": false,
+    "files.autoSave": "onFocusChange",
+    "editor.formatOnType": true,
+    "git.allowLargeRepositories": true,
+    "typescript.disableAutomaticTypeAcquisition": true,
+    "terminal.external.osxExec": "iTerm.app",
+    "workbench.welcome.enabled": true,
+    "workbench.iconTheme": "vs-seti",
+    "workbench.editor.enablePreviewFromQuickOpen": false
+}
