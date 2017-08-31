@@ -1,9 +1,63 @@
 [user]
 	name = Rahul Kavalapara
 	email = rkavalap@gmail.com
-[credential]
-	helper = cache
 [core]
-  autocrlf = input
-  excludesfile = ~/.gitignore
-  
+	excludesfile = /Users/rkavalap/.gitignore_global
+	# For windows set autocrlf to true
+	autocrlf = input
+	# for Windwos set editor to 'C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin
+	editor = vim
+	ignorecase = true
+	longPaths = true
+[credential]
+	# For windows set helper = !\"C:\\Program Files (x86)\\GitExtensions\\GitCredentialWinStore\\git-credential-winstore.exe\"
+	helper = cache
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	purge = !git clean -x -f -d -f $* -- ${GIT_PREFIX:-.}
+	theirlog = "!f() { \
+		upstream=$(git rev-parse --abbrev-ref @{upstream});\
+		push=$(git rev-parse --abbrev-ref @{push});\
+		remote=$(git config --local "branch.$(git rev-parse --abbrev-ref @).remote");\
+		cherrytarget="@{upstream}";\
+		[[ "$1" = "-p" ]] && { shift; cherrytarget="@{push}"; };\
+		[[ $push = $upstream ]] && { echo "push and upstream are the same"; cherrytarget="$remote/master"; } || echo "push [$push] and upstream [$upstream] differ";\
+		echo "using $cherrytarget";\
+		echo git log --cherry --oneline ...${cherrytarget} $@;\
+		git log --cherry --oneline ...${cherrytarget} $@;\
+	};f"
+	mylog = "!f() { \
+		upstream=$(git rev-parse --abbrev-ref @{upstream});\
+		push=$(git rev-parse --abbrev-ref @{push});\
+		remote=$(git config --local "branch.$(git rev-parse --abbrev-ref @).remote");\
+		cherrytarget="@{upstream}";\
+		[[ "$1" = "-p" ]] && { shift; cherrytarget="@{push}"; };\
+		[[ $push = $upstream ]] && { echo "push and upstream are the same"; cherrytarget="$remote/master"; } || echo "push [$push] and upstream [$upstream] differ";\
+		echo git log --cherry --oneline ${cherrytarget}... $@;\
+		git log --cherry --oneline ${cherrytarget}... $@;\
+	};f"
+[push]
+	default = current
+[color]
+	ui = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[fiter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
